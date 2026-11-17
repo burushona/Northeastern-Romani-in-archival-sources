@@ -1,0 +1,100 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "dc:conformsTo": "http://cldf.clld.org/v1.0/terms.rdf#Dictionary",
+  "dc:title": "Word index of North-Eastern Romani in 18th–19th-century sources",
+  "dc:description": "CLDF version of the word index (Словоуказатель) in K. A. Kozhanov, Цыганский язык в источниках XVIII–XIX вв. (из архивов России и Литвы), St Petersburg 2025. Headwords are generalised North-Eastern Romani forms; each attestation gives the form as written in the source, a Latin transliteration, and the source citation.",
+  "dc:creator": "Kirill Kozhanov",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dc:source": "sources.bib",
+  "dc:bibliographicCitation": "Kozhanov, Kirill. 2025. Цыганский язык в источниках XVIII–XIX вв. (из архивов России и Литвы). St Petersburg: Mamatov.",
+  "dc:language": "rmy",
+  "dialect": {"commentPrefix": null},
+  "tables": [
+    {
+      "url": "languages.csv",
+      "dc:conformsTo": "http://cldf.clld.org/v1.0/terms.rdf#LanguageTable",
+      "tableSchema": {
+        "columns": [
+          {"name": "ID", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#id", "datatype": {"base": "string", "format": "[a-zA-Z0-9_\\-]+"}, "required": true},
+          {"name": "Name", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#name", "datatype": "string"},
+          {"name": "Glottocode", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#glottocode", "datatype": {"base": "string", "format": "[a-z0-9]{4}[1-9][0-9]{3}"}},
+          {"name": "ISO639P3code", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#iso639P3code", "datatype": {"base": "string", "format": "[a-z]{3}"}},
+          {"name": "Macroarea", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#macroarea", "datatype": "string"}
+        ],
+        "primaryKey": ["ID"]
+      }
+    },
+    {
+      "url": "entries.csv",
+      "dc:conformsTo": "http://cldf.clld.org/v1.0/terms.rdf#EntryTable",
+      "dc:description": "Headwords of the index. Derived forms (уменьш., прич., нар., сравн., порядк., деепр., отр.) and prefixed verbs are separate rows linked to their main entry via Main_Entry_ID.",
+      "tableSchema": {
+        "columns": [
+          {"name": "ID", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#id", "datatype": {"base": "string", "format": "[a-zA-Z0-9_\\-]+"}, "required": true},
+          {"name": "Language_ID", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#languageReference", "datatype": "string", "required": true},
+          {"name": "Headword", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#headword", "datatype": "string", "required": true, "dc:description": "Generalised North-Eastern Romani form as in the book; | separates stem and ending"},
+          {"name": "Paradigm", "datatype": "string", "dc:description": "Further forms given with the headword: imperative and past for verbs, plural or feminine/plural endings for nominals"},
+          {"name": "Part_Of_Speech", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#partOfSpeech", "datatype": "string", "dc:description": "Grammatical labels as in the book (Russian abbreviations)"},
+          {"name": "Main_Entry_ID", "datatype": "string", "dc:description": "For derived forms and prefixed verbs: the entry they are listed under"},
+          {"name": "Subentry_Type", "datatype": "string", "dc:description": "Label of a derived form (уменьш., прич., нар. …) or 'prefix'"},
+          {"name": "Meaning", "datatype": "string", "dc:description": "Meaning in Russian as in the book"},
+          {"name": "Meaning_Latin", "datatype": "string", "dc:description": "Scholarly transliteration of Meaning"},
+          {"name": "Distribution", "datatype": "string", "dc:description": "Note on distribution in the North-Eastern dialects (есть в … / нет в …)"},
+          {"name": "Derived_From", "datatype": "string", "dc:description": "Base of derivation (← …)"},
+          {"name": "Composition", "datatype": "string", "dc:description": "Composition (= …)"},
+          {"name": "Header_Notes", "datatype": "string"},
+          {"name": "Etymology", "datatype": "string", "dc:description": "Etymological note (Этим.) in Russian"},
+          {"name": "Etymology_Latin", "datatype": "string"},
+          {"name": "See_Also", "datatype": "string", "separator": ";", "dc:description": "Headwords referred to with 'см. также'"},
+          {"name": "Letter", "datatype": "string"},
+          {"name": "Book_Order", "datatype": "integer"}
+        ],
+        "primaryKey": ["ID"],
+        "foreignKeys": [
+          {"columnReference": ["Language_ID"], "reference": {"resource": "languages.csv", "columnReference": ["ID"]}}
+        ]
+      }
+    },
+    {
+      "url": "senses.csv",
+      "dc:conformsTo": "http://cldf.clld.org/v1.0/terms.rdf#SenseTable",
+      "tableSchema": {
+        "columns": [
+          {"name": "ID", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#id", "datatype": {"base": "string", "format": "[a-zA-Z0-9_\\-]+"}, "required": true},
+          {"name": "Entry_ID", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#entryReference", "datatype": "string", "required": true},
+          {"name": "Sense_Number", "datatype": "string"},
+          {"name": "Description", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#description", "datatype": "string", "required": true, "dc:description": "Russian, as in the book"},
+          {"name": "Description_Latin", "datatype": "string"}
+        ],
+        "primaryKey": ["ID"]
+      }
+    },
+    {
+      "url": "attestations.csv",
+      "dc:description": "Every form cited from the sources, in the order of the book, one row per form and source.",
+      "tableSchema": {
+        "columns": [
+          {"name": "ID", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#id", "datatype": {"base": "string", "format": "[a-zA-Z0-9_\\-]+"}, "required": true},
+          {"name": "Entry_ID", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#entryReference", "datatype": "string", "required": true},
+          {"name": "Form", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#form", "datatype": "string", "required": true, "dc:description": "As written in the source (Cyrillic or Latin script, with the source's diacritics)"},
+          {"name": "Form_Latin", "datatype": "string", "dc:description": "Latin transliteration of Cyrillic forms (see README); Latin-script forms unchanged"},
+          {"name": "Script", "datatype": {"base": "string", "format": "Cyrl|Latn"}},
+          {"name": "Source", "propertyUrl": "http://cldf.clld.org/v1.0/terms.rdf#source", "datatype": "string", "separator": ";"},
+          {"name": "Source_Abbreviation", "datatype": "string", "dc:description": "Citation as printed in the book"},
+          {"name": "Editor_Note", "datatype": "string", "dc:description": "The author's grammatical labels before the form (мн., пов. 2 ед., субст. ж. …)"},
+          {"name": "Source_Annotation", "datatype": "string", "dc:description": "Everything the source gives after the form: further inflected forms in brackets, translations in «», + additional meanings"},
+          {"name": "Source_Annotation_Latin", "datatype": "string"},
+          {"name": "Source_Glosses", "datatype": "string", "separator": ";", "dc:description": "Translations quoted from the source («…»); '+ ' marks an additional meaning"},
+          {"name": "Source_Glosses_Latin", "datatype": "string", "separator": ";"},
+          {"name": "Sense_Numbers", "datatype": "string", "separator": ";", "dc:description": "Sense(s) of the headword this form attests, where the book marks them with (1), (2)"},
+          {"name": "Uncertain", "datatype": {"base": "boolean", "format": "true|false"}, "dc:description": "Morphologically unclear form, marked (?) in the book"},
+          {"name": "Same_Form_As_Previous", "datatype": {"base": "boolean", "format": "true|false"}, "dc:description": "Row repeats the previous form for a further source that adds a meaning or forms (… Григ. 1851, + «овца» Григ. 1852)"}
+        ],
+        "primaryKey": ["ID"],
+        "foreignKeys": [
+          {"columnReference": ["Entry_ID"], "reference": {"resource": "entries.csv", "columnReference": ["ID"]}}
+        ]
+      }
+    }
+  ]
+}

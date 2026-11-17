@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>North-Eastern Romani in 18th–19th-century sources — word index</title>
+<meta name="description" content="Searchable word index of North-Eastern Romani forms attested in sources from the late 18th to the early 20th century (Kozhanov 2025).">
+<style>
+  :root {
+    --bg: #faf8f4; --panel: #ffffff; --ink: #1f1d1a; --muted: #6b665e; --line: #e4dfd6;
+    --accent: #8a3b12; --accent-soft: #f4e9e1; --mark: #fbe7a1;
+    --data: "Charis SIL", "Gentium Plus", "Gentium Book Plus", "Noto Serif", "Cambria", "Times New Roman", serif;
+    --ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #171614; --panel: #201f1c; --ink: #ece8e1; --muted: #a39d93; --line: #35322d;
+            --accent: #e39a6c; --accent-soft: #3a2a20; --mark: #5c4a12; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 var(--ui); }
+  header { padding: 28px 20px 12px; max-width: 1000px; margin: 0 auto; }
+  h1 { font: 600 22px/1.25 var(--data); margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0; font-size: 14px; }
+  main { max-width: 1000px; margin: 0 auto; padding: 0 20px 60px; }
+  .controls { position: sticky; top: 0; z-index: 2; background: var(--bg); padding: 12px 0 10px; border-bottom: 1px solid var(--line); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  input[type=search] { flex: 1 1 320px; font: 17px var(--data); padding: 9px 12px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--panel); color: var(--ink); }
+  input[type=search]:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  select, button { font: 14px var(--ui); padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--panel); color: var(--ink); cursor: pointer; }
+  label.chk { font-size: 13px; color: var(--muted); display: flex; gap: 5px; align-items: center; cursor: pointer; }
+  .letters { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 2px; }
+  .letters button { padding: 2px 7px; font: 14px var(--data); border: none; background: none; color: var(--accent); }
+  .letters button[aria-pressed=true] { background: var(--accent-soft); border-radius: 5px; }
+  .count { color: var(--muted); font-size: 13px; margin: 10px 0 4px; }
+  .entry { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 10px 0; }
+  .hw { font: 600 19px var(--data); color: var(--accent); }
+  .par { font: 16px var(--data); margin-left: 4px; }
+  .pos { font: italic 15px var(--data); color: var(--muted); margin-left: 6px; }
+  .mean { font: 16px var(--data); margin-left: 6px; }
+  .ml { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .note { color: var(--muted); font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; font: 15px var(--data); }
+  th { text-align: left; font: 600 11px var(--ui); text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+       border-bottom: 1px solid var(--line); padding: 4px 6px; }
+  td { padding: 4px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.src { white-space: nowrap; font: 13px var(--ui); color: var(--muted); }
+  td.f { font-style: italic; }
+  .ann { color: var(--muted); }
+  .sub-e { margin: 10px 0 0 14px; padding-left: 12px; border-left: 3px solid var(--accent-soft); }
+  .sub-e .hw { font-size: 16px; }
+  .et { margin-top: 8px; font-size: 14px; font-family: var(--data); }
+  .et b { font-family: var(--ui); font-size: 12px; color: var(--muted); font-weight: 600; }
+  mark { background: var(--mark); color: inherit; border-radius: 2px; }
+  .more { display: block; margin: 16px auto; }
+  .more[hidden] { display: none; }
+  a.xref { color: var(--accent); cursor: pointer; text-decoration: underline dotted; }
+  footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); margin-top: 30px; padding-top: 14px; }
+  @media (max-width: 640px) { td.src { white-space: normal; } .ml { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>North-Eastern Romani in 18th–19th-century sources</h1>
+  <p class="sub">Word index from K. A. Kozhanov, <i>Цыганский язык в источниках XVIII–XIX вв. (из архивов России и Литвы)</i>, St Petersburg 2025 · <span id="stats"></span></p>
+</header>
+<main>
+  <div class="controls">
+    <div class="row">
+      <input type="search" id="q" placeholder="Search a headword, a form (Cyrillic or Latin) or a meaning…" autocomplete="off" autofocus>
+      <select id="field" aria-label="Search in">
+        <option value="all">everywhere</option>
+        <option value="hw">headwords</option>
+        <option value="form">attested forms</option>
+        <option value="mean">meanings &amp; glosses</option>
+        <option value="et">etymologies</option>
+      </select>
+      <select id="src" aria-label="Source"><option value="">all sources</option></select>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <label class="chk"><input type="checkbox" id="exact"> match diacritics exactly</label>
+      <label class="chk"><input type="checkbox" id="start"> match beginning of word</label>
+      <label class="chk"><input type="checkbox" id="showlat" checked> show transliteration</label>
+    </div>
+    <div class="letters" id="letters"></div>
+  </div>
+  <div class="count" id="count"></div>
+  <div id="results"></div>
+  <button class="more" id="more" hidden>Show more</button>
+  <footer>
+    Headwords are generalised North-Eastern Romani forms; forms are cited as written in the sources, followed by a Latin transliteration.
+    Data: <a href="https://github.com/__REPO__">CLDF dataset on GitHub</a>. Cite as: Kozhanov, Kirill. 2025. <i>Цыганский язык в источниках XVIII–XIX вв.</i> St Petersburg: Mamatov.
+  </footer>
+</main>
+<script>
+const EMBEDDED = /*DATA*/null;
+const $ = id => document.getElementById(id);
+const PAGE = 50;
+let DATA = null, INDEX = [], hits = [], shown = 0, letter = "";
+
+function fold(s, exact) {
+  s = (s || "").normalize("NFC").toLowerCase().replace(/[’ʼ'`]/g, "'").replace(/\|/g, "");
+  if (exact) return s;
+  return s.normalize("NFD").replace(/[̀-ͯ]/g, "")
+          .replace(/ł/g, "l").replace(/ß/g, "ss").replace(/ё/g, "е").replace(/ѣ/g, "е").replace(/і/g, "и").replace(/ъ(?=\s|$|[-,])/g, "");
+}
+function esc(s) { return (s || "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
+
+function build() {
+  // per entry, collect searchable strings by field (raw; folded at query time is too slow, so fold twice)
+  INDEX = DATA.entries.map(e => {
+    const hw = [e.h, e.p], form = [], mean = [e.m, e.ml], et = [e.et], srcs = new Set();
+    const addF = f => { form.push(f[0], f[1]); mean.push(f[4]); if (f[2]) srcs.add(f[2].split(" ")[0]); };
+    e.f.forEach(addF);
+    e.s.forEach(s => { hw.push(s.h); mean.push(s.m, s.ml); s.f.forEach(addF); });
+    const raw = { hw: hw.join(" ¦ "), form: form.join(" ¦ "), mean: mean.join(" ¦ "), et: et.join(" ") };
+    const folded = {}, exact = {};
+    for (const k in raw) { folded[k] = " " + fold(raw[k], false); exact[k] = " " + fold(raw[k], true); }
+    return { e, folded, exact, srcs };
+  });
+  const abbrs = new Set();
+  Object.keys(DATA.sources).forEach(k => abbrs.add(k.replace(/ \d{4}$/, "")));
+  const order = {};
+  Object.keys(DATA.sources).forEach(k => { const a = k.replace(/ \d{4}$/, ""), y = +k.slice(-4); order[a] = Math.min(order[a] || 9999, y); });
+  [...abbrs].sort((a, b) => order[a] - order[b]).forEach(a => {
+    const o = document.createElement("option"); o.value = a;
+    const yrs = Object.keys(DATA.sources).filter(k => k.startsWith(a + " ")).map(k => k.slice(-4)).sort();
+    o.textContent = a + " " + yrs.join(", "); $("src").appendChild(o);
+  });
+  const L = $("letters");
+  const letters = []; DATA.entries.forEach(e => { const l = (e.L); if (l && !letters.includes(l)) letters.push(l); });
+  letters.forEach(l => { const b = document.createElement("button"); b.textContent = l; b.setAttribute("aria-pressed", "false");
+    b.onclick = () => { letter = letter === l ? "" : l; [...L.children].forEach(x => x.setAttribute("aria-pressed", x.textContent === letter)); run(); };
+    L.appendChild(b); });
+  const nf = DATA.entries.reduce((n, e) => n + e.f.length + e.s.reduce((m, s) => m + s.f.length, 0), 0);
+  $("stats").textContent = `${DATA.entries.length.toLocaleString("en")} headwords · ${nf.toLocaleString("en")} attested forms`;
+}
+
+function run() {
+  const exact = $("exact").checked, start = $("start").checked, field = $("field").value, src = $("src").value;
+  const q = fold($("q").value.trim(), exact);
+  const needle = start ? [" " + q, "(" + q, "-" + q, "«" + q] : [q];
+  hits = INDEX.filter(x => {
+    if (letter && x.e.L !== letter) return false;
+    if (src && !x.srcs.has(src)) return false;
+    if (!q) return true;
+    const t = exact ? x.exact : x.folded;
+    const fields = field === "all" ? ["hw", "form", "mean", "et"] : [field];
+    return fields.some(k => needle.some(n => t[k].includes(n)));
+  });
+  // headword matches first
+  if (q) hits.sort((a, b) => (rank(b, q, exact) - rank(a, q, exact)) || (a.e.o - b.e.o));
+  shown = 0; $("results").innerHTML = "";
+  $("count").textContent = (q || letter || src) ? `${hits.length.toLocaleString("en")} entr${hits.length === 1 ? "y" : "ies"}` : `All ${hits.length.toLocaleString("en")} entries`;
+  more();
+}
+function rank(x, q, exact) {
+  const h = fold(x.e.h, exact);
+  if (h === q) return 3; if (h.startsWith(q)) return 2; if ((exact ? x.exact : x.folded).hw.includes(q)) return 1; return 0;
+}
+function hl(s) {
+  const q = $("q").value.trim(); if (!q) return esc(s);
+  const exact = $("exact").checked, fq = fold(q, exact);
+  // map folded positions back onto the original string
+  const chars = [...(s || "")]; let out = "", i = 0;
+  const f = chars.map(c => fold(c, exact));
+  const joined = f.join("");
+  const starts = []; let p = joined.indexOf(fq);
+  while (fq && p !== -1) { starts.push(p); p = joined.indexOf(fq, p + fq.length); }
+  if (!starts.length) return esc(s);
+  let pos = 0, si = 0, open = false, end = -1;
+  for (let k = 0; k < chars.length; k++) {
+    if (!open && si < starts.length && pos >= starts[si]) { out += "<mark>"; open = true; end = starts[si] + fq.length; si++; }
+    out += esc(chars[k]); pos += f[k].length;
+    if (open && pos >= end) { out += "</mark>"; open = false; }
+  }
+  if (open) out += "</mark>";
+  return out;
+}
+function formsTable(fs) {
+  if (!fs.length) return "";
+  const lat = $("showlat").checked, src = $("src").value;
+  let rows = fs.filter(f => !src || (f[2] || "").startsWith(src + " ")).map(f =>
+    `<tr><td class="f">${f[3] ? `<span class="ann" style="font-style:normal">${esc(f[3])}</span> ` : ""}${hl(f[0])}${f[5] ? " (?)" : ""}</td>` +
+    (lat ? `<td class="f">${hl(f[1])}</td>` : "") +
+    `<td class="ann">${hl(f[4])}</td><td class="src">${esc(f[2])}</td></tr>`).join("");
+  return `<table><thead><tr><th>Form in source</th>${lat ? "<th>Transliteration</th>" : ""}<th>Source gives</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function xrefs(list) {
+  return list.length ? ` <span class="note">see also ${list.map(x => `<a class="xref" data-x="${esc(x)}">${esc(x)}</a>`).join(", ")}</span>` : "";
+}
+function render(x) {
+  const e = x.e, lat = $("showlat").checked;
+  let h = `<div class="entry"><span class="hw">${hl(e.h)}</span>${e.p ? `<span class="par">${hl(e.p)}</span>` : ""}` +
+    `${e.pos ? `<span class="pos">${esc(e.pos)}</span>` : ""}${e.n ? ` <span class="note">(${esc(e.n)})</span>` : ""}` +
+    `<span class="mean">${hl(e.m)}</span>${xrefs(e.sa)}` +
+    (lat && e.ml ? `<div class="ml">${hl(e.ml)}</div>` : "") + formsTable(e.f);
+  e.s.forEach(s => {
+    h += `<div class="sub-e"><span class="pos" style="margin:0 6px 0 0">${s.l === "prefix" ? "" : esc(s.l)}</span><span class="hw">${hl(s.h)}</span>` +
+         `${s.m ? `<span class="mean">${hl(s.m)}</span>` : ""}${xrefs(s.sa || [])}` + formsTable(s.f) + `</div>`;
+  });
+  if (e.et) h += `<div class="et"><b>ETYMOLOGY</b> ${hl(e.et)}</div>`;
+  return h + "</div>";
+}
+function more() {
+  const frag = hits.slice(shown, shown + PAGE).map(render).join("");
+  $("results").insertAdjacentHTML("beforeend", frag);
+  shown += PAGE; $("more").hidden = shown >= hits.length;
+}
+$("results").addEventListener("click", ev => {
+  const a = ev.target.closest("a.xref"); if (!a) return;
+  $("q").value = a.dataset.x.replace("|", ""); $("field").value = "hw"; $("start").checked = true; letter = "";
+  [...$("letters").children].forEach(x => x.setAttribute("aria-pressed", "false")); run(); window.scrollTo(0, 0);
+});
+let t; $("q").addEventListener("input", () => { clearTimeout(t); t = setTimeout(run, 150); });
+["field", "src", "exact", "start", "showlat"].forEach(id => $(id).addEventListener("change", run));
+$("more").onclick = more;
+
+function init(d) {
+  DATA = d; DATA.entries.forEach((e, i) => { e.o = i; });
+  build();
+  const u = new URLSearchParams(location.hash.slice(1)); if (u.get("q")) $("q").value = u.get("q");
+  run();
+}
+if (EMBEDDED) init(EMBEDDED);
+else fetch("data.json").then(r => r.json()).then(init).catch(err => { $("count").textContent = "Could not load data.json: " + err; });
+</script>
+</body>
+</html>
