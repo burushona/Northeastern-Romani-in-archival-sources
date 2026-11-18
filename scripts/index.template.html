@@ -21,6 +21,7 @@
   header { padding: 28px 20px 12px; max-width: 1000px; margin: 0 auto; }
   h1 { font: 600 22px/1.25 var(--data); margin: 0 0 4px; }
   .sub { color: var(--muted); margin: 0; font-size: 14px; }
+  .sub a, footer a { color: var(--accent); }
   main { max-width: 1000px; margin: 0 auto; padding: 0 20px 60px; }
   .controls { position: sticky; top: 0; z-index: 2; background: var(--bg); padding: 12px 0 10px; border-bottom: 1px solid var(--line); }
   .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
@@ -34,42 +35,55 @@
   .letters button { padding: 2px 7px; font: 14px var(--data); border: none; background: none; color: var(--accent); }
   .letters button[aria-pressed=true] { background: var(--accent-soft); border-radius: 5px; }
   .count { color: var(--muted); font-size: 13px; margin: 10px 0 4px; }
+  .count button { font-size: 12px; padding: 2px 8px; margin-left: 8px; }
   .entry { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 10px 0; }
   .hw { font: 600 19px var(--data); color: var(--accent); }
   .par { font: 16px var(--data); margin-left: 4px; }
   .pos { font: italic 15px var(--data); color: var(--muted); margin-left: 6px; }
   .mean { font: 16px var(--data); margin-left: 6px; }
-  .ml { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .en { font-size: 14px; margin-top: 2px; }
+  .en::before { content: "EN "; font: 600 10px var(--ui); color: var(--muted); letter-spacing: .05em; }
   .note { color: var(--muted); font-size: 13px; }
+  .links { font-size: 13px; color: var(--muted); margin-top: 3px; }
   table { width: 100%; border-collapse: collapse; margin-top: 8px; font: 15px var(--data); }
   th { text-align: left; font: 600 11px var(--ui); text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
        border-bottom: 1px solid var(--line); padding: 4px 6px; }
   td { padding: 4px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
   tr:last-child td { border-bottom: none; }
-  td.src { white-space: nowrap; font: 13px var(--ui); color: var(--muted); }
+  td.src { white-space: nowrap; font: 13px var(--ui); }
   td.f { font-style: italic; }
   .ann { color: var(--muted); }
+  a.srcl, a.xref, a.ed { color: var(--accent); cursor: pointer; text-decoration: underline dotted; text-underline-offset: 2px; }
+  a.ed { margin-left: 6px; font-size: 12px; white-space: nowrap; text-decoration: none; }
   .sub-e { margin: 10px 0 0 14px; padding-left: 12px; border-left: 3px solid var(--accent-soft); }
   .sub-e .hw { font-size: 16px; }
   .et { margin-top: 8px; font-size: 14px; font-family: var(--data); }
-  .et b { font-family: var(--ui); font-size: 12px; color: var(--muted); font-weight: 600; }
+  .et b { font-family: var(--ui); font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
   mark { background: var(--mark); color: inherit; border-radius: 2px; }
   .more { display: block; margin: 16px auto; }
   .more[hidden] { display: none; }
-  a.xref { color: var(--accent); cursor: pointer; text-decoration: underline dotted; }
+  .nolink { color: var(--ink); }
   footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); margin-top: 30px; padding-top: 14px; }
-  @media (max-width: 640px) { td.src { white-space: normal; } .ml { display: none; } }
+  dialog { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--ink); max-width: 620px;
+           width: calc(100% - 32px); padding: 18px 20px; }
+  dialog::backdrop { background: rgba(0,0,0,.35); }
+  dialog h2 { font: 600 18px var(--data); margin: 0 0 6px; color: var(--accent); }
+  dialog .d { font-family: var(--data); }
+  dialog ul { padding-left: 18px; color: var(--muted); font-size: 14px; }
+  dialog a { color: var(--accent); }
+  dialog .close { float: right; }
+  @media (max-width: 640px) { td.src { white-space: normal; } }
 </style>
 </head>
 <body>
 <header>
   <h1>North-Eastern Romani in 18th–19th-century sources</h1>
-  <p class="sub">Word index from K. A. Kozhanov, <i>Цыганский язык в источниках XVIII–XIX вв. (из архивов России и Литвы)</i>, St Petersburg 2025 · <span id="stats"></span></p>
+  <p class="sub">Word index from K. A. Kozhanov, <i>Цыганский язык в источниках XVIII–XIX вв. (из архивов России и Литвы)</i>, St Petersburg 2025 · <span id="stats"></span> · <a href="sources/index.html">Sources and their texts</a></p>
 </header>
 <main>
   <div class="controls">
     <div class="row">
-      <input type="search" id="q" placeholder="Search a headword, a form (Cyrillic or Latin) or a meaning…" autocomplete="off" autofocus>
+      <input type="search" id="q" placeholder="Search a headword, a form or a meaning (Russian or English)…" autocomplete="off" autofocus>
       <select id="field" aria-label="Search in">
         <option value="all">everywhere</option>
         <option value="hw">headwords</option>
@@ -82,7 +96,7 @@
     <div class="row" style="margin-top:6px">
       <label class="chk"><input type="checkbox" id="exact"> match diacritics exactly</label>
       <label class="chk"><input type="checkbox" id="start"> match beginning of word</label>
-      <label class="chk"><input type="checkbox" id="showlat" checked> show transliteration</label>
+      <label class="chk"><input type="checkbox" id="showlat"> show Latin transliteration of forms</label>
     </div>
     <div class="letters" id="letters"></div>
   </div>
@@ -90,15 +104,16 @@
   <div id="results"></div>
   <button class="more" id="more" hidden>Show more</button>
   <footer>
-    Headwords are generalised North-Eastern Romani forms; forms are cited as written in the sources, followed by a Latin transliteration.
+    Headwords are generalised North-Eastern Romani forms; forms are cited as written in the sources. English meanings are translations of the Russian meanings of the book.
+    Click a source for its full reference; “p.” opens the source text in the book at that page.
     Data: <a href="https://github.com/__REPO__">CLDF dataset on GitHub</a>. Cite as: Kozhanov, Kirill. 2025. <i>Цыганский язык в источниках XVIII–XIX вв.</i> St Petersburg: Mamatov.
   </footer>
 </main>
+<dialog id="dlg"><button class="close" id="dlgclose" aria-label="Close">✕</button><div id="dlgbody"></div></dialog>
 <script>
-const EMBEDDED = /*DATA*/null;
 const $ = id => document.getElementById(id);
 const PAGE = 50;
-let DATA = null, INDEX = [], hits = [], shown = 0, letter = "";
+let DATA = null, INDEX = [], BYID = {}, hits = [], shown = 0, letter = "", only = null;
 
 function fold(s, exact) {
   s = (s || "").normalize("NFC").toLowerCase().replace(/[’ʼ'`]/g, "'").replace(/\|/g, "");
@@ -109,30 +124,28 @@ function fold(s, exact) {
 function esc(s) { return (s || "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
 
 function build() {
-  // per entry, collect searchable strings by field (raw; folded at query time is too slow, so fold twice)
   INDEX = DATA.entries.map(e => {
-    const hw = [e.h, e.p], form = [], mean = [e.m, e.ml], et = [e.et], srcs = new Set();
-    const addF = f => { form.push(f[0], f[1]); mean.push(f[4]); if (f[2]) srcs.add(f[2].split(" ")[0]); };
+    BYID[e.id] = e; e.s.forEach(s => { BYID[s.id] = e; });
+    const hw = [e.h, e.p], form = [], mean = [e.m, e.en], et = [e.et], srcs = new Set();
+    const addF = f => { form.push(f[0], f[1]); mean.push(f[4]); if (f[2]) srcs.add(f[2].replace(/ \d{4}.*$/, "")); };
     e.f.forEach(addF);
-    e.s.forEach(s => { hw.push(s.h); mean.push(s.m, s.ml); s.f.forEach(addF); });
+    e.s.forEach(s => { hw.push(s.h); mean.push(s.m, s.en); s.f.forEach(addF); });
     const raw = { hw: hw.join(" ¦ "), form: form.join(" ¦ "), mean: mean.join(" ¦ "), et: et.join(" ") };
     const folded = {}, exact = {};
     for (const k in raw) { folded[k] = " " + fold(raw[k], false); exact[k] = " " + fold(raw[k], true); }
     return { e, folded, exact, srcs };
   });
-  const abbrs = new Set();
-  Object.keys(DATA.sources).forEach(k => abbrs.add(k.replace(/ \d{4}$/, "")));
   const order = {};
   Object.keys(DATA.sources).forEach(k => { const a = k.replace(/ \d{4}$/, ""), y = +k.slice(-4); order[a] = Math.min(order[a] || 9999, y); });
-  [...abbrs].sort((a, b) => order[a] - order[b]).forEach(a => {
+  Object.keys(order).sort((a, b) => order[a] - order[b]).forEach(a => {
     const o = document.createElement("option"); o.value = a;
     const yrs = Object.keys(DATA.sources).filter(k => k.startsWith(a + " ")).map(k => k.slice(-4)).sort();
     o.textContent = a + " " + yrs.join(", "); $("src").appendChild(o);
   });
-  const L = $("letters");
-  const letters = []; DATA.entries.forEach(e => { const l = (e.L); if (l && !letters.includes(l)) letters.push(l); });
+  const L = $("letters"), letters = [];
+  DATA.entries.forEach(e => { if (e.L && !letters.includes(e.L)) letters.push(e.L); });
   letters.forEach(l => { const b = document.createElement("button"); b.textContent = l; b.setAttribute("aria-pressed", "false");
-    b.onclick = () => { letter = letter === l ? "" : l; [...L.children].forEach(x => x.setAttribute("aria-pressed", x.textContent === letter)); run(); };
+    b.onclick = () => { only = null; letter = letter === l ? "" : l; [...L.children].forEach(x => x.setAttribute("aria-pressed", x.textContent === letter)); run(); };
     L.appendChild(b); });
   const nf = DATA.entries.reduce((n, e) => n + e.f.length + e.s.reduce((m, s) => m + s.f.length, 0), 0);
   $("stats").textContent = `${DATA.entries.length.toLocaleString("en")} headwords · ${nf.toLocaleString("en")} attested forms`;
@@ -141,19 +154,24 @@ function build() {
 function run() {
   const exact = $("exact").checked, start = $("start").checked, field = $("field").value, src = $("src").value;
   const q = fold($("q").value.trim(), exact);
-  const needle = start ? [" " + q, "(" + q, "-" + q, "«" + q] : [q];
-  hits = INDEX.filter(x => {
-    if (letter && x.e.L !== letter) return false;
-    if (src && !x.srcs.has(src)) return false;
-    if (!q) return true;
-    const t = exact ? x.exact : x.folded;
-    const fields = field === "all" ? ["hw", "form", "mean", "et"] : [field];
-    return fields.some(k => needle.some(n => t[k].includes(n)));
-  });
-  // headword matches first
-  if (q) hits.sort((a, b) => (rank(b, q, exact) - rank(a, q, exact)) || (a.e.o - b.e.o));
+  if (only) {
+    hits = INDEX.filter(x => x.e.id === only);
+  } else {
+    const needle = start ? [" " + q, "(" + q, "-" + q, "«" + q] : [q];
+    hits = INDEX.filter(x => {
+      if (letter && x.e.L !== letter) return false;
+      if (src && !x.srcs.has(src)) return false;
+      if (!q) return true;
+      const t = exact ? x.exact : x.folded;
+      const fields = field === "all" ? ["hw", "form", "mean", "et"] : [field];
+      return fields.some(k => needle.some(n => t[k].includes(n)));
+    });
+    if (q) hits.sort((a, b) => (rank(b, q, exact) - rank(a, q, exact)) || (DATA.entries.indexOf(a.e) - DATA.entries.indexOf(b.e)));
+  }
   shown = 0; $("results").innerHTML = "";
-  $("count").textContent = (q || letter || src) ? `${hits.length.toLocaleString("en")} entr${hits.length === 1 ? "y" : "ies"}` : `All ${hits.length.toLocaleString("en")} entries`;
+  if (only) $("count").innerHTML = `Entry <b>${esc(BYID[only].h)}</b><button id="showall">show all entries</button>`;
+  else $("count").textContent = (q || letter || src) ? `${hits.length.toLocaleString("en")} entr${hits.length === 1 ? "y" : "ies"}` : `All ${hits.length.toLocaleString("en")} entries`;
+  if (only) $("showall").onclick = () => { only = null; history.replaceState(null, "", location.pathname); run(); };
   more();
 }
 function rank(x, q, exact) {
@@ -161,12 +179,10 @@ function rank(x, q, exact) {
   if (h === q) return 3; if (h.startsWith(q)) return 2; if ((exact ? x.exact : x.folded).hw.includes(q)) return 1; return 0;
 }
 function hl(s) {
-  const q = $("q").value.trim(); if (!q) return esc(s);
+  const q = only ? "" : $("q").value.trim(); if (!q) return esc(s);
   const exact = $("exact").checked, fq = fold(q, exact);
-  // map folded positions back onto the original string
-  const chars = [...(s || "")]; let out = "", i = 0;
-  const f = chars.map(c => fold(c, exact));
-  const joined = f.join("");
+  const chars = [...(s || "")]; let out = "";
+  const f = chars.map(c => fold(c, exact)), joined = f.join("");
   const starts = []; let p = joined.indexOf(fq);
   while (fq && p !== -1) { starts.push(p); p = joined.indexOf(fq, p + fq.length); }
   if (!starts.length) return esc(s);
@@ -179,53 +195,88 @@ function hl(s) {
   if (open) out += "</mark>";
   return out;
 }
+function link(label, id) {
+  return id ? `<a class="xref" data-id="${esc(id)}">${esc(label)}</a>` : `<span class="nolink">${esc(label)}</span>`;
+}
+function srcLinks(abbr) {
+  // "Добр. 1893, 1908" -> one link per year
+  const m = (abbr || "").match(/^(.*?) (\d{4}(?:, \d{4})*)$/);
+  if (!m) return esc(abbr);
+  return esc(m[1]) + " " + m[2].split(", ").map(y => DATA.sources[m[1] + " " + y]
+    ? `<a class="srcl" data-s="${esc(m[1] + " " + y)}">${y}</a>` : y).join(", ");
+}
 function formsTable(fs) {
   if (!fs.length) return "";
   const lat = $("showlat").checked, src = $("src").value;
-  let rows = fs.filter(f => !src || (f[2] || "").startsWith(src + " ")).map(f =>
-    `<tr><td class="f">${f[3] ? `<span class="ann" style="font-style:normal">${esc(f[3])}</span> ` : ""}${hl(f[0])}${f[5] ? " (?)" : ""}</td>` +
-    (lat ? `<td class="f">${hl(f[1])}</td>` : "") +
-    `<td class="ann">${hl(f[4])}</td><td class="src">${esc(f[2])}</td></tr>`).join("");
-  return `<table><thead><tr><th>Form in source</th>${lat ? "<th>Transliteration</th>" : ""}<th>Source gives</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table>`;
+  const rows = fs.filter(f => !src || (f[2] || "").startsWith(src + " ")).map(f => {
+    const ed = f[6] && f[6].includes("#p") ? `<a class="ed" href="sources/${f[6].replace("#p", ".html#p")}${encodeURIComponent(":" + f[0])}" title="open the source text in the book at this page">p. ${f[6].split("#p")[1]}</a>` : "";
+    return `<tr><td class="f">${f[3] ? `<span class="ann" style="font-style:normal">${esc(f[3])}</span> ` : ""}${hl(f[0])}${f[5] ? " (?)" : ""}</td>` +
+      (lat ? `<td class="f">${hl(f[1])}</td>` : "") +
+      `<td class="ann">${hl(f[4])}</td><td class="src">${srcLinks(f[2])}${ed}</td></tr>`;
+  }).join("");
+  return `<table><thead><tr><th>Form in source</th>${lat ? "<th>Latin</th>" : ""}<th>Source gives</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 function xrefs(list) {
-  return list.length ? ` <span class="note">see also ${list.map(x => `<a class="xref" data-x="${esc(x)}">${esc(x)}</a>`).join(", ")}</span>` : "";
+  return list && list.length ? ` <span class="note">see also ${list.map(x => link(x[0], x[1])).join(", ")}</span>` : "";
 }
 function render(x) {
-  const e = x.e, lat = $("showlat").checked;
-  let h = `<div class="entry"><span class="hw">${hl(e.h)}</span>${e.p ? `<span class="par">${hl(e.p)}</span>` : ""}` +
-    `${e.pos ? `<span class="pos">${esc(e.pos)}</span>` : ""}${e.n ? ` <span class="note">(${esc(e.n)})</span>` : ""}` +
+  const e = x.e;
+  const notes = [];
+  if (e.dist) notes.push(esc(e.dist));
+  if (e.dr.length) notes.push("← " + e.dr.map(d => link(d[0], d[1])).join(", "));
+  if (e.cp.length) notes.push("= " + e.cp.map(d => link(d[0], d[1])).join(" + "));
+  if (e.oth) notes.push(esc(e.oth));
+  let h = `<div class="entry" id="${e.id}"><span class="hw">${hl(e.h)}</span>${e.p ? `<span class="par">${hl(e.p)}</span>` : ""}` +
+    `${e.pos ? `<span class="pos">${esc(e.pos)}</span>` : ""}${notes.length ? ` <span class="note">(${notes.join("; ")})</span>` : ""}` +
     `<span class="mean">${hl(e.m)}</span>${xrefs(e.sa)}` +
-    (lat && e.ml ? `<div class="ml">${hl(e.ml)}</div>` : "") + formsTable(e.f);
+    (e.en ? `<div class="en">${hl(e.en)}</div>` : "") +
+    (e.ds.length ? `<div class="links">Derivatives: ${e.ds.map(d => link(d[0], d[1])).join(", ")}</div>` : "") +
+    formsTable(e.f);
   e.s.forEach(s => {
     h += `<div class="sub-e"><span class="pos" style="margin:0 6px 0 0">${s.l === "prefix" ? "" : esc(s.l)}</span><span class="hw">${hl(s.h)}</span>` +
-         `${s.m ? `<span class="mean">${hl(s.m)}</span>` : ""}${xrefs(s.sa || [])}` + formsTable(s.f) + `</div>`;
+         `${s.m ? `<span class="mean">${hl(s.m)}</span>` : ""}${xrefs(s.sa)}` +
+         (s.en ? `<div class="en">${hl(s.en)}</div>` : "") + formsTable(s.f) + `</div>`;
   });
   if (e.et) h += `<div class="et"><b>ETYMOLOGY</b> ${hl(e.et)}</div>`;
   return h + "</div>";
 }
 function more() {
-  const frag = hits.slice(shown, shown + PAGE).map(render).join("");
-  $("results").insertAdjacentHTML("beforeend", frag);
+  $("results").insertAdjacentHTML("beforeend", hits.slice(shown, shown + PAGE).map(render).join(""));
   shown += PAGE; $("more").hidden = shown >= hits.length;
 }
+function showEntry(id) {
+  const e = BYID[id]; if (!e) return;
+  only = e.id; letter = ""; [...$("letters").children].forEach(x => x.setAttribute("aria-pressed", "false"));
+  try { history.replaceState(null, "", "#" + e.id); } catch (err) {}
+  run(); window.scrollTo(0, 0);
+}
+function showSource(name) {
+  const v = DATA.sources[name]; if (!v) return;
+  $("dlgbody").innerHTML = `<h2>${esc(name)}</h2><div class="d">${esc(v.author)}${v.author ? ", " : ""}${esc(v.title)}</div>` +
+    (v.pubs.length ? `<ul>${v.pubs.map(p => `<li><b>[${esc(p[0])}]</b> ${esc(p[1])}</li>`).join("")}</ul>` : "") +
+    (v.eds.length ? `<p>Text in the book: ${v.eds.map(e => `<a href="sources/${e[0]}.html">${esc(e[1])}</a>`).join(" · ")}</p>` : "") +
+    `<p style="font-size:13px"><a href="sources/index.html#${esc(v.key)}">All sources</a> · <a class="xref" id="filtersrc">show all forms from ${esc(name.replace(/ \d{4}$/, ""))}</a></p>`;
+  $("filtersrc").onclick = () => { $("dlg").close(); only = null; $("src").value = name.replace(/ \d{4}$/, ""); $("q").value = ""; run(); };
+  $("dlg").showModal();
+}
 $("results").addEventListener("click", ev => {
-  const a = ev.target.closest("a.xref"); if (!a) return;
-  $("q").value = a.dataset.x.replace("|", ""); $("field").value = "hw"; $("start").checked = true; letter = "";
-  [...$("letters").children].forEach(x => x.setAttribute("aria-pressed", "false")); run(); window.scrollTo(0, 0);
+  const a = ev.target.closest("a.xref[data-id]"); if (a) { showEntry(a.dataset.id); return; }
+  const s = ev.target.closest("a.srcl"); if (s) showSource(s.dataset.s);
 });
-let t; $("q").addEventListener("input", () => { clearTimeout(t); t = setTimeout(run, 150); });
-["field", "src", "exact", "start", "showlat"].forEach(id => $(id).addEventListener("change", run));
+$("dlgclose").onclick = () => $("dlg").close();
+$("dlg").addEventListener("click", ev => { if (ev.target === $("dlg")) $("dlg").close(); });
+let t; $("q").addEventListener("input", () => { clearTimeout(t); only = null; t = setTimeout(run, 150); });
+["field", "src", "exact", "start", "showlat"].forEach(id => $(id).addEventListener("change", () => { if (id !== "showlat") only = null; run(); }));
 $("more").onclick = more;
+window.addEventListener("hashchange", () => { const h = location.hash.slice(1); if (BYID[h]) showEntry(h); });
 
 function init(d) {
-  DATA = d; DATA.entries.forEach((e, i) => { e.o = i; });
-  build();
-  const u = new URLSearchParams(location.hash.slice(1)); if (u.get("q")) $("q").value = u.get("q");
+  DATA = d; build();
+  const h = location.hash.slice(1);
+  if (BYID[h]) { showEntry(h); return; }
   run();
 }
-if (EMBEDDED) init(EMBEDDED);
-else fetch("data.json").then(r => r.json()).then(init).catch(err => { $("count").textContent = "Could not load data.json: " + err; });
+fetch("data.json").then(r => r.json()).then(init).catch(err => { $("count").textContent = "Could not load data.json: " + err; });
 </script>
 </body>
 </html>

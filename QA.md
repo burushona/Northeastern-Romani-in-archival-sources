@@ -24,4 +24,5 @@ These are kept as printed. Each gets its own entry in `sources.bib`, marked as a
 ## Other
 
 * *dlúgo¹*: the citation «Патк. 1900» is set in italics; this is corrected during conversion.
+* The list of sources (p. 8) gives Bardanes's list as “Источник 2”, but in the book it is Источник 1 (Источник 2 is Rüdiger). The data link it to Источник 1.
 * The list of sources cites Grigor'ev's material as [Böhtlingk 1852, 1854], but the bibliography has *Boehtlingk 1853* (and Böhtlingk 1854). `sources.bib` uses the bibliography entries.
