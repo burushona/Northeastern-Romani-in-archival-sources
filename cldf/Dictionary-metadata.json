@@ -336,6 +336,11 @@
               "format": "true|false"
             },
             "dc:description": "Row repeats the previous form for a further source that adds a meaning or forms (… Григ. 1851, + «овца» Григ. 1852)"
+          },
+          {
+            "name": "Corrected",
+            "datatype": "string",
+            "dc:description": "If not empty, this row differs from the printed book by the correction of a misprint (the note from scripts/corrections.tsv)"
           }
         ],
         "primaryKey": [

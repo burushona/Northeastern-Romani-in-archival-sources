@@ -63,6 +63,7 @@
   .more { display: block; margin: 16px auto; }
   .more[hidden] { display: none; }
   .nolink { color: var(--ink); }
+  .corr { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; cursor: help; }
   footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); margin-top: 30px; padding-top: 14px; }
   dialog { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--ink); max-width: 620px;
            width: calc(100% - 32px); padding: 18px 20px; }
@@ -105,7 +106,7 @@
   <button class="more" id="more" hidden>Show more</button>
   <footer>
     Headwords are generalised North-Eastern Romani forms; forms are cited as written in the sources. English meanings are translations of the Russian meanings of the book.
-    Click a source for its full reference; “p.” opens the source text in the book at that page.
+    Click a source for its full reference; “p.” opens the source text in the book at that page. Forms marked “corrected” differ from the printed book by the correction of a misprint (see <a href="https://github.com/__REPO__">corrections.tsv</a>).
     Data: <a href="https://github.com/__REPO__">CLDF dataset on GitHub</a>. Cite as: Kozhanov, Kirill. 2025. <i>Цыганский язык в источниках XVIII–XIX вв.</i> St Petersburg: Mamatov.
   </footer>
 </main>
@@ -212,7 +213,7 @@ function formsTable(fs) {
     const ed = f[6] && f[6].includes("#p") ? `<a class="ed" href="sources/${f[6].replace("#p", ".html#p")}${encodeURIComponent(":" + f[0])}" title="open the source text in the book at this page">p. ${f[6].split("#p")[1]}</a>` : "";
     return `<tr><td class="f">${f[3] ? `<span class="ann" style="font-style:normal">${esc(f[3])}</span> ` : ""}${hl(f[0])}${f[5] ? " (?)" : ""}</td>` +
       (lat ? `<td class="f">${hl(f[1])}</td>` : "") +
-      `<td class="ann">${hl(f[4])}</td><td class="src">${srcLinks(f[2])}${ed}</td></tr>`;
+      `<td class="ann">${hl(f[4])}</td><td class="src">${srcLinks(f[2])}${ed}${f[7] ? ` <span class="corr" title="${esc(f[7])}">corrected</span>` : ""}</td></tr>`;
   }).join("");
   return `<table><thead><tr><th>Form in source</th>${lat ? "<th>Latin</th>" : ""}<th>Source gives</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table>`;
 }

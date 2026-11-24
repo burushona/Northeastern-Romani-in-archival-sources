@@ -63,7 +63,7 @@ e0042-03,NERomani,pro-,,,e0042,prefix,,,,,,,,,,,,B,42
 e0042-04,NERomani,z-,,,e0042,prefix,,,,,,,,,,,,B,42
 e0042-05,NERomani,za-,,,e0042,prefix,,,,,,,,,,,,B,42
 e0043,NERomani,bagaibé,,м.,,,пение,singing,,bagál,e0042,,,,,,,B,43
-e0044,NERomani,bagaibnýtk|o,-a,прил.,,,связанный с пением,connected with singing,,bagaibé,e0043,,,,,,,B,44
+e0044,NERomani,bagaibnýtk|o,-a,прил.,,,связанный с пением,related to singing,,bagaibé,e0043,,,,,,,B,44
 e0045,NERomani,báxt,,ж.,,,"счастье, удача","happiness, luck",,,,,,,,,,B,45
 e0045-01,NERomani,baxtorí,,,e0045,уменьш.,,,,,,,,,,,,B,45
 e0046,NERomani,baxtal|ó,-ý -é,прил.,,,"счастливый, удачливый","happy, lucky",,báxt,e0045,,,,,,,B,46
@@ -137,7 +137,7 @@ e0084,NERomani,bašavél,bašáv bašad’á,неперех.,,,играть (н�
 e0084-01,NERomani,bašadó,,,e0084,прич.,,,,,,,,,,,,B,84
 e0084-02,NERomani,po-,,,e0084,prefix,,,,,,,,,,,,B,84
 e0084-03,NERomani,za-,,,e0084,prefix,,,,,,,,,,,,B,84
-e0085,NERomani,bašél,baš bašt’á,неперех.,,,издавать звуки,to make a sound,,,,,,,,,,B,85
+e0085,NERomani,bašél,baš bašt’á,неперех.,,,издавать звуки,to make sounds,,,,,,,,,,B,85
 e0085-01,NERomani,roz-,,,e0085,prefix,,,,,,,,,,,,B,85
 e0085-02,NERomani,za-,,,e0085,prefix,,,,,,,,,,,,B,85
 e0086,NERomani,bašn|ó,-é,м.,,,петух,rooster,,,,,,,,,,B,86
@@ -173,7 +173,7 @@ e0104,NERomani,bešt|ó,-ý -é,пред.,,,сидящий,sitting,,,,,,,,bešl�
 e0105,NERomani,bevél’,-á,ж.,,,вечер,evening,,,,,,,,bʼel’vʼél’,,B,105
 e0106,NERomani,bevel’é,,нар.,,,вечером,in the evening,,,,,,,,bʼel’vʼel’é,e0091,B,106
 e0107,NERomani,bi,,предл.,,,без (+ род.),without (+ gen.),,,,,,,,,,B,107
-e0108,NERomani,by,,част.,,,бы,would (conditional particle),"есть в бел.-, рус.-цыг.",,,,,,может быть поздним заимствованием ⇐ вост.-слав.,,,B,108
+e0108,NERomani,by,,част.,,,бы,(conditional particle),"есть в бел.-, рус.-цыг.",,,,,,может быть поздним заимствованием ⇐ вост.-слав.,,,B,108
 e0109,NERomani,bíbáxt,,ж.,,,несчастье,misfortune,,báxt,e0045,,,,,,,B,109
 e0110,NERomani,bibaxtal|ó,-ý -é,прил.,,,несчастный,"unhappy, unfortunate",,,,,,,,,,B,110
 e0110-01,NERomani,bibaxtalés,,,e0110,нар.,,,,,,,,,,,,B,110
@@ -241,19 +241,19 @@ e0144,NERomani,bóg|o,-i,м.,,,бедняк,poor man,"есть в бел.-цыг
 e0145,NERomani,bók|o,-i,м.,,,бок,side,"есть в лит.-, рус.-цыг., лотф.",,,,,,ввиду широкого распространения может быть старым заимствованием ⇐ ср.-пол. bok м. ‘бок’ (= совр.),,,B,145
 e0146,NERomani,bókh,-á,ж.,,,голод,hunger,,,,,,,,,,B,146
 e0147,NERomani,bokhal|ó,-ý -é,прил.,,,голодный,hungry,,,,,,,,,,B,147
-e0148,NERomani,bokhalʼól,bokhalʼóv bokhályja,неперех.,,,голодать,"to starve, to be hungry",,,,,,,,,,B,148
+e0148,NERomani,bokhalʼól,bokhalʼóv bokhályja,неперех.,,,голодать,to be hungry,,,,,,,,,,B,148
 e0149,NERomani,bold’ól,bold’óv boldyjá,неперех.,,,креститься,"to be baptized, to cross oneself",,boldó,e0150-01,,,,,,,B,149
 e0150,NERomani,bolél,ból bold’á,перех.,,,крестить,to baptize,,,,,,,,,,B,150
 e0150-01,NERomani,boldó,,,e0150,прич.,,,,,,,,,,,,B,150
 e0150-02,NERomani,ob-,,,e0150,prefix,,,,,,,,,,,,B,150
-e0151,NERomani,bolybé(n),,м.,,,небо,"sky, heaven",,,,,,,,,,B,151
+e0151,NERomani,bolybé(n),,м.,,,небо,sky,,,,,,,,,,B,151
 e0152,NERomani,bor|í,-já,ж.,,,"невестка, сноха","daughter-in-law, sister-in-law",,,,,,,,,,B,152
 e0153,NERomani,bóv,-á,м.,,,печь,"stove, oven",,,,,,,,,,B,153
 e0154,NERomani,bravínt|а,-y,ж.,,,водка,vodka,,,,,,,"⇐ нем.: позднеср.-в.-нем. brantwīn, совр. Branntwein м. ‘водка’ [Kluge: 146–147] (в цыг. с метатезой, ср. синти.прус. branjinta)",,,B,154
 e0154-01,NERomani,bravíntyca,,,e0154,уменьш.,,,,,,,,,,,,B,154
 e0155,NERomani,bravintýtk|o,-a,прил.,,,водочный,vodka (adj.),,bravínta,e0154,,,,,,,B,155
 e0156,NERomani,brég|o,-i,м.,,,берег,"shore, bank",,,,,,,"⇐ юж.-слав., т. к. есть в сев.-зап., ср. синти prèko ‘берег’ [von Sowa: 13]",,,B,156
-e0157,NERomani,brék,,род,,,? пазуха,? bosom,,,,,,,,,,B,157
+e0157,NERomani,brék,,род,,,? пазуха,bosom,,,,,,,,,,B,157
 e0158,NERomani,brévnʼ|a,-i,ж.,,,охапка,armful,"есть в рус.-, лит.-цыг.; в лотф. bremņa",,,,,,"ввиду широкого распространения ⇐ вост.-слав. *brémnʼa ‘охапка’ (вероятно, диалектный полонизм brzemię ‘бремя, груз’; ср. бел. бярэ́мя ‘тж.’)",,,B,158
 e0158-01,NERomani,brévnica,,,e0158,уменьш.,,,,,,,,,,,,B,158
 e0159,NERomani,brévn|o,-y,м.,,,бревно,log,"есть в лит.-, рус.-цыг.",,,,,,ввиду ограниченного распространения может быть ⇐ вост.-слав. (ср. рус. бревно́),,,B,159

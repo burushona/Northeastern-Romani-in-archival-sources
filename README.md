@@ -40,6 +40,7 @@ The index lists every word form found in North-Eastern Romani sources from the f
   * `Source_Glosses`: the «» translations on their own
   * `Sense_Numbers`: the (1), (2) markers
   * `Uncertain`: forms marked (?)
+  * `Corrected`: not empty where the row differs from the printed book by the correction of a misprint
 * `sources.bib`: the book itself, one entry per source and year as abbreviated in the book (with the description from the book's list of sources and the full reference of the publication), the archival collections and the electronic databases.
 
 ## English meanings and transliteration
@@ -76,7 +77,7 @@ sh build.sh path/to/book.pdf
 
 The pages of a form in the source texts are found automatically by searching the form in the text of each source (3,841 of 3,967 forms from these sources are found).
 
-`scripts/sources.json` (the book's list of sources, pp. 8–9, with references from the bibliography), `scripts/meanings_en.json`, `scripts/archives.txt` and `scripts/hyphenated_words.txt` (words with a real hyphen, used to join lines) are kept in the repository, so only the PDF is needed.
+`scripts/corrections.tsv` (misprints corrected during conversion), `scripts/sources.json` (the book's list of sources, pp. 8–9, with references from the bibliography), `scripts/meanings_en.json`, `scripts/archives.txt` and `scripts/hyphenated_words.txt` (words with a real hyphen, used to join lines) are kept in the repository, so only the PDF is needed.
 
 To check the dataset against the CLDF standard:
 
@@ -88,7 +89,7 @@ cldf validate cldf/Dictionary-metadata.json
 ## Status
 
 * The data follow the published book.
-* `QA.md` lists the few places where the typesetting does not allow a form to be matched with its source, and some source years that are probably misprints.
+* Misprints in the book are corrected during conversion; they are listed in `scripts/corrections.tsv` and `QA.md`, and the affected forms are marked in the `Corrected` column of `attestations.csv`.
 
 ## License
 

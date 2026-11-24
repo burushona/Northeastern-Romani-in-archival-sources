@@ -139,7 +139,23 @@ def resolve(text, self_id=None):
     return (word, (mains or cands)[0][0])
 
 
-def forms_rows(entry_id, forms):
+CORR = [r for r in csv.DictReader(open(os.path.join(HERE, "corrections.tsv"), encoding="utf-8"), delimiter="\t")]
+
+def corrected_note(main_hw, row):
+    """note from corrections.tsv if this row contains a corrected passage"""
+    h = fold(nf(main_hw).replace("|", "")).rstrip("¹²³")
+    text = " ".join([row["Editor_Note"], row["Form"], row["Source_Annotation"], row["Source_Abbreviation"]])
+    words = set(w.strip(",;()") for w in nf(text).split())
+    for c in CORR:
+        if fold(nf(c["entry"])) != h:
+            continue
+        need = [w.strip(",;()") for w in nf(c["corrected"]).split() if w.strip(",;()")]
+        if all(w in words for w in need[-4:]):
+            return c["note"]
+    return ""
+
+
+def forms_rows(entry_id, forms, main_hw=""):
     out = []
     for k, f in enumerate(forms, 1):
         keys = [key(f["source"], y) for y in f["years"]] if f["source"] else []
@@ -165,13 +181,15 @@ def forms_rows(entry_id, forms):
             "Uncertain": "true" if f["uncertain"] else "false",
             "Same_Form_As_Previous": "true" if f.get("repeated") else "false",
         }
+        row["Corrected"] = corrected_note(main_hw, row)
         atts.append(row); out.append(row)
     return out
 
 def web_forms(rows):
     return [[r["Form"], r["Form_Latin"], r["Source_Abbreviation"], r["Editor_Note"], r["Source_Annotation"],
              r["Uncertain"] == "true",
-             (f"{r['Edition']}#p{r['Edition_Page']}" if r["Edition_Page"] else (r["Edition"] or ""))] for r in rows]
+             (f"{r['Edition']}#p{r['Edition_Page']}" if r["Edition_Page"] else (r["Edition"] or "")),
+             r["Corrected"]] for r in rows]
 
 def english_meaning(senses_):
     parts = []
@@ -216,7 +234,7 @@ for e in D["entries"]:
     for k, (num, desc) in enumerate(e["senses"], 1):
         senses.append({"ID": f"{eid}-s{k}", "Entry_ID": eid, "Sense_Number": num,
                        "Description": nf(desc), "Description_English": en_of(desc)})
-    fr = forms_rows(eid, e["forms"])
+    fr = forms_rows(eid, e["forms"], e["headword"])
     subs_web = []
     for s in e["subentries"]:
         sid = s["_id"]; sm = nf(s["meaning"])
@@ -233,7 +251,7 @@ for e in D["entries"]:
         if sm:
             senses.append({"ID": f"{sid}-s1", "Entry_ID": sid, "Sense_Number": "",
                            "Description": sm, "Description_English": en_of(sm)})
-        sfr = forms_rows(sid, s["forms"])
+        sfr = forms_rows(sid, s["forms"], e["headword"])
         subs_web.append({"id": sid, "l": s["label"], "h": nf(s["headword"]), "m": sm, "en": en_of(sm) if sm else "",
                          "sa": [list(x) for x in ssee], "f": web_forms(sfr)})
     web.append({"id": eid, "L": e["letter"], "h": nf(e["headword"]), "p": nf(e["paradigm"]), "pos": nf(e["pos"]),
